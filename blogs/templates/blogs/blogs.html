@@ -4,8 +4,8 @@
 
 {%for blog in blogs %}
 <ul>
-    <li>
-        {{ blog }}
+    <li> 
+        <a href="{% url 'blogs:blogpost' blog.id %}">{{ blog }}</a>
     </li>
     {% empty %}
     <li>
