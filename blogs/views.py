@@ -38,7 +38,7 @@ def newblog(request):
     return render(request, 'blogs/new_blog.html', context)
 
 def editblog(request, blog_id):
-    """Page for editting the blog."""
+    """View for editting the blog."""
     blog = BlogPost.objects.get(id=blog_id)
 
     if request.method != 'POST':
@@ -49,8 +49,19 @@ def editblog(request, blog_id):
         form = BlogForm(instance=blog, data=request.POST)
         if form.is_valid():
             form.save()
-            # redirect to view the edited blogpost in the blogpost view
             return redirect('blogs:blogpost', title_id=blog.id)
+        
     # show the editing workspace
     context = {'blog': blog, 'form': form}
     return render(request, 'blogs/edit_blog.html', context)
+
+def delete_blog(request ,id):
+    """View to delete a blog post."""
+    blogpost = BlogPost.objects.get(id=id)
+
+    if request.method == 'POST':
+        blogpost.delete()
+        return redirect(reverse('blogs:blogs'))
+    
+    context = {'blogpost': blogpost}
+    return render(request, 'blogs/confirm_delete.html', context)

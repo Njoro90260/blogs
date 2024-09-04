@@ -8,10 +8,15 @@
 
 <h1>{{ blogpost.title }}</h1>
 
+
 <p>
     {{ blogpost.text|linebreaks }}
 </p>
 <p>
     Date Added: {{ blogpost.date_added }}
 </p>
+
+<!-- Link to delete the blog post -->
+<a href="{% url 'blogs:delete_blogpost' blogpost.id %}">Delete this blog</a>
+<br>
 {% endblock content %}
