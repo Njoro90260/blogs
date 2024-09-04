@@ -12,4 +12,6 @@ urlpatterns = [
     path('blog-view/<int:title_id>', views.blogpost, name="blogpost"),
     # path to add a new blog.
     path('new-blog/', views.newblog, name="newblog"),
+    # path to edit a blog
+    path('edit-blog/<int:blog_id>', views.editblog, name="editblog"),
 ]

@@ -37,6 +37,23 @@ def newblog(request):
     context = {'form': form}
     return render(request, 'blogs/new_blog.html', context)
 
+def editblog(request, blog_id):
+    """Page for editting the blog."""
+    blog = BlogPost.objects.get(id=blog_id)
+
+    if request.method != 'POST':
+        # Initial request; pre-fill form with the current entry
+        form = BlogForm(instance=blog)
+    else:
+        # Post data submitted; process data.
+        form = BlogForm(instance=blog, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('blogs:blogpost', title_id=blog.id)
+        # show the editing workspace
+        context = {'blog': blog, 'form': form}
+        return render(request, 'blogs/edit_blog.html', context)
+
 
 
 

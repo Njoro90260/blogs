@@ -10,6 +10,9 @@
     {% for blog in blogs %}
     <li> 
         <a href="{% url 'blogs:blogpost' blog.id %}">{{ blog }}</a>
+        <small>
+            <a href="{% url 'blogs:editblog' blog.id %}">Edit this blog</a>
+        </small>
     </li>
     {% empty %}
     <li>
