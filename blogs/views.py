@@ -30,12 +30,12 @@ def newblog(request):
         # POST data submitted; process data.
         form = BlogForm(data=request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(reverse('blogs:blogs', args=[newblog.id]))
-        
-        # Display a blank or invalid form.
-        context = {'form': form}
-        return render(request, 'blogs/new_blog.html', context)
+            new_blog = form.save() #get new blogpost instance.
+            return redirect(reverse('blogs:blogpost', args=[new_blog.id])) 
+    
+    # Display a blank or invalid form
+    context = {'form': form}
+    return render(request, 'blogs/new_blog.html', context)
 
 
 
