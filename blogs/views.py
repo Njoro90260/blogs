@@ -49,11 +49,8 @@ def editblog(request, blog_id):
         form = BlogForm(instance=blog, data=request.POST)
         if form.is_valid():
             form.save()
+            # redirect to view the edited blogpost in the blogpost view
             return redirect('blogs:blogpost', title_id=blog.id)
-        # show the editing workspace
-        context = {'blog': blog, 'form': form}
-        return render(request, 'blogs/edit_blog.html', context)
-
-
-
-
+    # show the editing workspace
+    context = {'blog': blog, 'form': form}
+    return render(request, 'blogs/edit_blog.html', context)

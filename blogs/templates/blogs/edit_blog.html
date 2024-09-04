@@ -1,11 +1,11 @@
-{% extends blogs/base.html %}
+{% extends "blogs/base.html" %}
 {% block title %}
 <title>{{ blog.title }}</title>
 {% endblock title %}
 {% block content %}
-<form action="{% url 'blogs:editblog' blod.id %}">
+<form action="{% url 'blogs:editblog' blog.id %}" method="POST">
     {% csrf_token %}
     {{ form.as_p }}
-    <button name="submit">Save changes</button>
+    <button type="submit" name="submit">Save changes</button>
 </form>
 {% endblock content%}
