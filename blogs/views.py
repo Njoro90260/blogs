@@ -3,6 +3,8 @@ from .models import BlogPost
 from django.urls import reverse
 from .forms import BlogForm
 from django.urls import reverse 
+from django.contrib.auth.decorators import login_required
+from django.http import Http404
 # Create your views here.
 
 def index(request):
@@ -18,9 +20,11 @@ def blogs(request):
 def blogpost(request, title_id):
     """Page for the blogpost."""
     blogpost = BlogPost.objects.get(id=title_id)
+    # Make sure the blogpost belongs to the current user.
     context = {'blogpost': blogpost}
     return render(request, 'blogs/blogpost.html', context)
 
+@login_required
 def newblog(request):
     """Page for adding a new blog."""
     if request.method != 'POST':
@@ -30,16 +34,21 @@ def newblog(request):
         # POST data submitted; process data.
         form = BlogForm(data=request.POST)
         if form.is_valid():
-            new_blog = form.save() #get new blogpost instance.
+            new_blog = form.save(commit=False) #get new blogpost instance.
+            new_blog.owner = request.user
+            new_blog.save()
             return redirect(reverse('blogs:blogpost', args=[new_blog.id])) 
     
     # Display a blank or invalid form
     context = {'form': form}
     return render(request, 'blogs/new_blog.html', context)
 
+@login_required
 def editblog(request, blog_id):
     """View for editting the blog."""
     blog = BlogPost.objects.get(id=blog_id)
+    if blog.owner != request.user:
+        raise Http404
 
     if request.method != 'POST':
         # Initial request; pre-fill form with the current entry
@@ -55,9 +64,12 @@ def editblog(request, blog_id):
     context = {'blog': blog, 'form': form}
     return render(request, 'blogs/edit_blog.html', context)
 
+@login_required
 def delete_blog(request ,id):
     """View to delete a blog post."""
     blogpost = BlogPost.objects.get(id=id)
+    if blogpost.owner != request.user:
+        raise Http404
 
     if request.method == 'POST':
         blogpost.delete()

@@ -7,14 +7,13 @@
 {% block content %}
 
 <h1>{{ blogpost.title }}</h1>
-
-
-<p>
-    {{ blogpost.text|linebreaks }}
-</p>
 <p>
     Date Added: {{ blogpost.date_added }}
 </p>
+<p>
+    {{ blogpost.text|linebreaks }}
+</p>
+<small>{{ blogpost.owner}}</small>
 
 <!-- Link to delete the blog post -->
 <a href="{% url 'blogs:delete_blogpost' blogpost.id %}">Delete this blog</a>
