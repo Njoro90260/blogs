@@ -1,25 +1,37 @@
+
 {% extends "blogs/base.html" %}
-{% block title %}
-<title>Blogs</title>
-{% endblock title%}
-
+{% block title %}<title>Blogs</title>{% endblock title %}
+{% block page_header %}
+<h1 class="mb-4">Blog Posts</h1>
+{% endblock page_header%}
 {% block content %}
-<h1>Blogs</h1>
+<div class="container mt-4">
+    <div class="row">
+        {% for blog in blogs %}
+        <div class="col-md-6 mb-4" style="color: black;">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ blog.title }}</h5>
+                    <p class="card-text">
+                        {{ blog.text|truncatewords:10 }}... 
+                        <a href="{% url 'blogs:blogpost' blog.id %}">Read more</a>
+                    </p>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{ blog.date_added|date:"F j, Y" }} by {{ blog.owner.username }}
+                    {% if logged_user == blog.owner %}
+                        <small>
+                            <a href="{% url 'blogs:editblog' blog.id %}">Edit this blog</a>
+                        </small>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No blogs have been posted yet.</p>
+        {% endfor %}
+    </div>
+    <a href="{% url 'blogs:newblog' %}">Add a new blog</a>
+</div>
+{% endblock %}
 
-<ul>
-    {% for blog in blogs %}
-    <li> 
-        <a href="{% url 'blogs:blogpost' blog.id %}">{{ blog }}</a>
-        <small>
-            <a href="{% url 'blogs:editblog' blog.id %}">Edit this blog</a>
-        </small>
-    </li>
-    {% empty %}
-    <li>
-        No blogs available.
-    </li>
-    {% endfor %}
-</ul>
-
-<a href="{% url 'blogs:newblog' %}">Add a new blog</a>
-{% endblock content %}

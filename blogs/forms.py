@@ -7,6 +7,13 @@ class BlogForm(forms.ModelForm):
         fields = ['title', 'text']
         labels = {'text': '', 'title': ''}
         widgets = {
-            'title': forms.TextInput(attrs={'placeholder': 'Enter the title here'}),
-            'text': forms.Textarea(attrs={'cols': 80, 'placeholder': 'Write your post here...'})
-            }
+            'title': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Enter the title here'
+            }),
+            'text': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 10,  # Sets the number of visible text lines
+                'placeholder': 'Write your post here...'
+            }),
+        }

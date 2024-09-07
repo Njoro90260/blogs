@@ -1,21 +1,26 @@
 {% extends "blogs/base.html" %}
 
-{% block title %}
-
-<title>{{ blogpost.title }}</title>
-{% endblock title %}
-{% block content %}
-
-<h1>{{ blogpost.title }}</h1>
-<p>
-    Date Added: {{ blogpost.date_added }}
-</p>
-<p>
-    {{ blogpost.text|linebreaks }}
-</p>
-<small>{{ blogpost.owner}}</small>
-
+{% block title %}<title>{{ blogpost.title }}</title>{% endblock title %}
+<div class="card">
+    {% block page_header %}
+    <div class="card-header">
+        <h1>{{ blogpost.title }}</h1>
+        <small>{{ blogpost.owner }}</small>
+        <p>Date Added: {{ blogpost.date_added }}</p>
+    </div>
+    {% endblock page_header %}
+    {% block content %}
+    <div class="card-body">
+        <p>{{ blogpost.text|linebreaks }}</p>
+    </div> 
+    <div class="card-footer">
+        <small>{{ blogpost.owner }}</small>
+        {% if logged_user == blogpost.owner %}
 <!-- Link to delete the blog post -->
 <a href="{% url 'blogs:delete_blogpost' blogpost.id %}">Delete this blog</a>
 <br>
-{% endblock content %}
+{% endif %}
+    </div>
+  </div>
+  {%endblock content %}
+</div>

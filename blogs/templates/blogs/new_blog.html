@@ -1,17 +1,32 @@
 {% extends "blogs/base.html" %}
 
 {% block title %}
-<title> Add Blog </title>
+<title>Add a New Blog</title>
 {% endblock title %}
-
+{% block page_header%}
+<h2 class="mb-4">Add a New Blog</h2>
+{% endblock page_header%}
 {% block content %}
-
-<h2>Add a New Blog</h2>
-
-<form action="{% url 'blogs:newblog' %}" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" name="submit">Add Blog</button>
-</form>
-
+<div class="container mt-5">
+    
+    <!-- Form starts here -->
+    <form action="{% url 'blogs:newblog' %}" method="POST" class="row g-3">
+        {% csrf_token %}
+        
+        <!-- Using Bootstrap's form-control class for proper styling -->
+        <div class="mb-3">
+            {{ form.title.label_tag }} 
+            {{ form.title }}
+        </div>
+        <div class="mb-3">
+            {{ form.text.label_tag }} 
+            {{ form.text }}
+        </div>
+        
+        <!-- Submit button styled with Bootstrap's btn classes -->
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Add Blog</button>
+        </div>
+    </form>
+</div>
 {% endblock content %}

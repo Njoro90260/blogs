@@ -1,4 +1,4 @@
-{% load bootstrap5 %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,42 +7,92 @@
     {% block title %}
     <title>Document</title>
     {% endblock title %}
+    {% load bootstrap5 %}
     {% bootstrap_css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dark-mode.css' %}" id="dark-theme" disabled>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="{% url 'blogs:index' %}">Blogs-Home</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{% url 'blogs:blogs' %}">Blogs</a>
-              </li>
+<body class="{% if request.session.theme == 'dark' %}bg-dark text-white{% endif %}">
+
+  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'blogs:index' %}">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" style="color:blue;">MENU</span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'blogs:blogs' %}">Blogs</a>
+                </li>
             </ul>
-            <ul class="navbar-nav ml-auto">
-              {% if user.is_authenticated %}
-              <li class="nav-item">
-                <span class="navbar-text">Hello, {{user.username }}.</span> 
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
-              </li>
-              {% else %}
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:login' %}">Login</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'users:register' %}">Register</a>
-              </li>
-              {% endif %}
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <span class="navbar-text">Hello, {{ user.username }}.</span> 
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'users:register' %}">Register</a>
+                </li>
+                {% endif %}
             </ul>
-          </div>
         </div>
-      </nav>
-      {% block content %}{% endblock content %}
+        <header>
+            <div class="container">
+                <!-- Button to toggle theme -->
+                <button id="theme-switch" class="btn btn-outline-light">Toggle Theme</button>
+            </div>
+        </header>
+    </div>
+</nav>
+
+      <main role="main" class="container-fluid">
+        <div class="pb-2 mb-2 border-bottom">
+          {% block page_header %}{% endblock page_header %}
+        </div>
+        <div>
+          {% block content %}{% endblock content %}
+        </div>
+      </main>
       {% bootstrap_javascript %}
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const themeSwitch = document.getElementById('theme-switch');
+            let theme = "{{ request.session.theme }}";
+
+            // Function to toggle the theme
+            function toggleTheme() {
+                theme = theme === "dark" ? "light" : "dark";
+                document.body.classList.toggle("bg-dark");
+                document.body.classList.toggle("text-white");
+
+                // Make an AJAX request to update the theme in the session
+                fetch("{% url 'blogs:toggle_theme' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                    },
+                    body: JSON.stringify({ theme: theme }),
+                });
+            }
+
+            // Set the initial button text based on the current theme
+            if (theme === "dark") {
+                themeSwitch.textContent = "Switch Theme";
+            } else {
+                themeSwitch.textContent = "Switch Theme";
+            }
+
+            themeSwitch.addEventListener('click', toggleTheme);
+        });
+    </script>
 </body>
 </html>

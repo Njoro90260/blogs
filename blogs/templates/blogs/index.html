@@ -1,30 +1,36 @@
-
-
-<title>Home | blogs</title>
 {% extends "blogs/base.html" %}
-
-{% block content %}
-
-
-<header>
+{%block title%}
+{% endblock title %}
+<title>Home | blogs</title>
+{% block page_header %}
+<div class="mt-4 p-5 bg-primary text-white rounded">
     <h1>Welcome to blogs!</h1>
-    <p>Explore, Learn, and Get Inspired</p>
-</header>
-<pre>
-    Welcome to <strong>blogs</strong>, 
-    your go-to destination for insightful articles, tips, 
-    and stories that spark curiosity and ignite passion. Whether 
-    you're here to learn something new, find inspiration, or simply 
-    enjoy some well-crafted content, you're in the right place.
-</pre>
-<pre>
-    At <strong>blogs</strong>, we believe in the power 
+    <p>Welcome to <strong>blogs</strong>, 
+        your go-to destination for insightful articles, tips, 
+        and stories that spark curiosity and ignite passion. Whether 
+        you're here to learn something new, find inspiration, or simply 
+        enjoy some well-crafted content, you're in the right place.
+    </p>
+    <p>
+        At <strong>blogs</strong>, we believe in the power 
     of words to change the world. Our mission is to deliver content that
      not only informs but also inspires. We're a team of passionate
       writers, creators, and thinkers who love to explore new ideas
        and share them with you.
-</pre>
+    </p>
+    {% if user.is_authenticated%}
+    <p>
+        <a  style="color:white;" href="{% url 'blogs:blogs' %}">
+        Let's go! &raquo;
+        </a>
+    </p>
+    {% else %}
+    <a class="btn btn-lg btn-primary" href="{% url 'users:register' %}"
+role="button">Register &raquo;</a>
+<a class="btn btn-lg btn-primary" href="{% url 'users:login' %}"
+role="button">Login &raquo;</a>
+{% endif %}
+  </div>
+{% endblock page_header %}
 
-
-{% endblock content %} 
 

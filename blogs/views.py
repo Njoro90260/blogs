@@ -5,7 +5,21 @@ from .forms import BlogForm
 from django.urls import reverse 
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-# Create your views here.
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+
+# Create your views here
+
+@csrf_exempt
+def toggle_theme(request):
+    """View function to change the theme."""
+    if request.method == "POST":
+        data = json.loads(request.body)
+        theme = data.get('theme', 'light')
+        request.session['theme'] = theme
+        return JsonResponse({"status": "success", "theme": theme})
+    return JsonResponse({"status": "error"}, status=400)
 
 def index(request):
     """The home page for blogs."""
@@ -13,15 +27,17 @@ def index(request):
 
 def blogs(request):
     """Page for the blogs."""
-    blogs = BlogPost.objects.order_by('date_added')
-    context = {'blogs': blogs}
+    blogs = BlogPost.objects.order_by('-date_added')
+    logged_user = request.user
+    context = {'blogs': blogs, 'logged_user': logged_user}
     return render(request, 'blogs/blogs.html', context)
 
 def blogpost(request, title_id):
     """Page for the blogpost."""
     blogpost = BlogPost.objects.get(id=title_id)
+    logged_user = request.user
     # Make sure the blogpost belongs to the current user.
-    context = {'blogpost': blogpost}
+    context = {'blogpost': blogpost, 'logged_user': logged_user}
     return render(request, 'blogs/blogpost.html', context)
 
 @login_required
