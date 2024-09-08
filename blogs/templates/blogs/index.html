@@ -1,10 +1,12 @@
 {% extends "blogs/base.html" %}
 {%block title%}
-{% endblock title %}
 <title>Home | blogs</title>
+{% endblock title %}
 {% block page_header %}
+<h1 class="mb-4">Welcome to blogs!</h1>
+{% endblock page_header %}
+{% block content %}
 <div class="mt-4 p-5 bg-primary text-white rounded">
-    <h1>Welcome to blogs!</h1>
     <p>Welcome to <strong>blogs</strong>, 
         your go-to destination for insightful articles, tips, 
         and stories that spark curiosity and ignite passion. Whether 
@@ -31,6 +33,6 @@ role="button">Register &raquo;</a>
 role="button">Login &raquo;</a>
 {% endif %}
   </div>
-{% endblock page_header %}
+{% endblock content %}
 
 

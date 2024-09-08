@@ -1,6 +1,7 @@
 """Defines url patterns for blogs."""
 from django.urls import path
 from . import views
+from django.views.generic import TemplateView
 
 app_name = 'blogs'
 urlpatterns = [
@@ -18,4 +19,6 @@ urlpatterns = [
     path('delete-blog/<int:id>', views.delete_blog, name="delete_blogpost"),
      # path to the toogle theme.
     path('toggle-theme/', views.toggle_theme, name='toggle_theme'),
+    # path to my about
+    path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 ]
