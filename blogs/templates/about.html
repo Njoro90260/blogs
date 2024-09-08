@@ -1,0 +1,33 @@
+{% extends "blogs/base.html" %}
+{% load static %}
+
+<head>
+
+    {% block title %}<title>About Me</title>{% endblock title %}
+    <style>
+        .profile-img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+        }
+        .about-section {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    {% block page_header %}
+    <h1 class="mb-4 about-section">About Me</h1>
+    {% endblock page_header %}
+    {% block content %}
+    <div class="container mt-5 about-section">
+        <img src="{% static 'images/profile.jpg' %}" alt="Profile Picture" class="profile-img mb-4">
+        <p>Hello! I’m Peter Njoroge, a passionate Django developer with one year of experience in building dynamic web applications. My journey in web development began with a keen interest in Python and Django, leading me to develop several projects that showcase my skills in creating robust and scalable solutions.</p>
+        <p>Throughout the past year, I’ve worked on diverse projects ranging from simple web apps to more complex systems, honing my expertise in backend development, database management, and user interface design. I thrive on solving challenging problems and continuously seek opportunities to expand my knowledge and contribute to meaningful projects.</p>
+        <p>Feel free to explore my work, and don’t hesitate to reach out if you’d like to connect or discuss potential collaborations.</p>
+    </div>
+    {% endblock content %}
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
