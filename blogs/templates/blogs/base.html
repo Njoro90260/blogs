@@ -168,8 +168,7 @@
 
 {% endblock footer %}
     
-    <!-- Add Font Awesome icons for social media (optional) -->
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    {% comment %} <script src="https://kit.fontawesome.com/a076d05399.js"></script> {% endcomment %}
 
     {% bootstrap_javascript %}
 
@@ -177,7 +176,6 @@
         document.addEventListener("DOMContentLoaded", function () {
             const themeSwitch = document.getElementById('theme-switch');
             let theme = "{{ request.session.theme }}";
-a
             // Function to toggle the theme
             function toggleTheme() {
                 theme = theme === "dark" ? "light" : "dark";
