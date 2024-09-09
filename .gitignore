@@ -1,1 +1,15 @@
+# Ignore images
 blogs/static/images/profile.jpg
+
+# Python cache and bytecode files
+__pycache__/
+*.pyc
+
+# SQLite database
+db.sqlite3
+
+# Virtual environment
+env/
+
+# Logs and other temporary files
+*.log
