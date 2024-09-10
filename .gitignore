@@ -8,8 +8,11 @@ __pycache__/
 # SQLite database
 db.sqlite3
 
-# Virtual environment
+# Linux Virtual environment
 env/
 
 # Logs and other temporary files
 *.log
+
+# windows virtual environment
+myenv/
