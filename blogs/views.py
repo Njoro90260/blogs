@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import BlogPost
 from django.urls import reverse
 from .forms import BlogForm
@@ -34,7 +34,7 @@ def blogs(request):
 
 def blogpost(request, title_id):
     """Page for the blogpost."""
-    blogpost = BlogPost.objects.get(id=title_id)
+    blogpost = get_object_or_404(BlogPost, id=title_id)
     logged_user = request.user
     # Make sure the blogpost belongs to the current user.
     context = {'blogpost': blogpost, 'logged_user': logged_user}
@@ -62,7 +62,7 @@ def newblog(request):
 @login_required
 def editblog(request, blog_id):
     """View for editting the blog."""
-    blog = BlogPost.objects.get(id=blog_id)
+    blog = get_object_or_404(BlogPost, id=blog_id)
     if blog.owner != request.user:
         raise Http404
 
@@ -83,7 +83,7 @@ def editblog(request, blog_id):
 @login_required
 def delete_blog(request ,id):
     """View to delete a blog post."""
-    blogpost = BlogPost.objects.get(id=id)
+    blogpost = get_object_or_404(BlogPost, id=id)
     if blogpost.owner != request.user:
         raise Http404
 
