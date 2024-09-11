@@ -136,7 +136,7 @@ STATIC_URL = '/static/'
 # Optional: If you have multiple locations for static files, you can list them here.
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    os.path.join(BASE_DIR, 'blogs/static'),
+    os.path.join(BASE_DIR, 'static'),
 ]
 
 # Heroku settings.
