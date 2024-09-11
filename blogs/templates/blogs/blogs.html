@@ -4,7 +4,11 @@
 {% block page_header %}
 <h1 class="mb-4">Blog Posts</h1>
 {% endblock page_header%}
-{% block content %}
+{% block content %} <h3>
+{% if user.is_authenticated %}
+<a href="{% url 'blogs:newblog' %}">Add a new blog</a>
+</h3>
+{% endif %}
 <div class="container mt-4">
     <div class="row">
         {% for blog in blogs %}
@@ -31,9 +35,6 @@
         <p>No blogs have been posted yet.</p>
         {% endfor %}
     </div>
-    {% if user.is_authenticated %}
-    <a href="{% url 'blogs:newblog' %}">Add a new blog</a>
-    {% endif %}
 </div>
 {% endblock %}
 
