@@ -136,12 +136,14 @@ STATIC_URL = '/static/'
 # Optional: If you have multiple locations for static files, you can list them here.
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'blogs/static'),
 ]
 
 # Heroku settings.
 import django_heroku
 django_heroku.settings(locals())
 
-
-
-
+if os.environ.get('DEBUG') == 'TRUE':
+    DEBUG = True
+elif os.environ.get('DEBUG') == 'FALSE':
+    DEBUG = False
