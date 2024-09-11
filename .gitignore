@@ -6,7 +6,7 @@ __pycache__/
 *.pyc
 
 # SQLite database
-db.sqlite3
+*.sqlite3
 
 # Linux Virtual environment
 env/
