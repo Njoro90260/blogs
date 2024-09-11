@@ -122,7 +122,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -134,10 +133,12 @@ LOGIN_URL = 'users:login'
 STATIC_URL = '/static/'
 
 # Optional: If you have multiple locations for static files, you can list them here.
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-#     os.path.join(BASE_DIR, 'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),  # Correct path for the static directory
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 
 # Heroku settings.
 import django_heroku
