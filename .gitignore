@@ -1,5 +1,6 @@
 # Ignore images
-blogs/static/images/profile.jpg
+static/images/profile.0c9eca608eed.jpg
+static/images/profile.jpg
 
 # Python cache and bytecode files
 __pycache__/
