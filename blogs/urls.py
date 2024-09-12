@@ -18,7 +18,7 @@ urlpatterns = [
     # path to delete a blog post.
     path('delete-blog/<int:id>', views.delete_blog, name="delete_blogpost"),
      # path to the toogle theme.
-    # path('toggle-theme/', views.toggle_theme, name='toggle_theme'),
+    path('toggle-theme/', views.toggle_theme, name='toggle_theme'),
     # path to my about
     path('about/', TemplateView.as_view(template_name='about.html'), name='about'),
 ]

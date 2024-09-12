@@ -5,21 +5,21 @@ from .forms import BlogForm
 from django.urls import reverse 
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-# import json
-# from django.http import JsonResponse
-# from django.views.decorators.csrf import csrf_exempt
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here
 
-# @csrf_exempt
-# def toggle_theme(request):
-#     """View function to change the theme."""
-#     if request.method == "POST":
-#         data = json.loads(request.body)
-#         theme = data.get('theme', 'light')
-#         request.session['theme'] = theme
-#         return JsonResponse({"status": "success", "theme": theme})
-#     return JsonResponse({"status": "error"}, status=400)
+@csrf_exempt
+def toggle_theme(request):
+    """View function to change the theme."""
+    if request.method == "POST":
+        data = json.loads(request.body)
+        theme = data.get('theme', 'light')
+        request.session['theme'] = theme
+        return JsonResponse({"status": "success", "theme": theme})
+    return JsonResponse({"status": "error"}, status=400)
 
 def index(request):
     """The home page for blogs."""
