@@ -13,6 +13,7 @@
     {% comment %} <link rel="stylesheet" href="{% static 'css/dark-mode.css' %}" id="dark-theme" disabled> {% endcomment %}
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    {% block static_css %}{% endblock static_css %}
     <style>
         html, body {
             height: 100%;

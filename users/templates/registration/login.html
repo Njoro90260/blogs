@@ -1,8 +1,12 @@
 {% extends "blogs/base.html" %}
 {% load bootstrap5 %}
+{% load static %}
 {% block title %}
 <title>Login</title>
 {% endblock title %}
+{% block static_css %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock static_css %}
 
 {% block page_header %}
 <h2 class="mb-4">Log in to your account.</h2>
@@ -12,6 +16,8 @@
     {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
+    <div class="form-container">
+      <div class="registration-form">
     <form action="{% url 'users:login' %}" method="post">
         {% csrf_token %}
         {% bootstrap_form form %}
@@ -20,4 +26,14 @@
         {% endbuttons %}
         <input type="hidden" name="next" value="{% url 'blogs:index' %}" />
       </form>
+      <small>
+        <a href="{% url 'users:register' %}">
+            New to blogs?
+            <span class="link">
+                Register
+            </span>
+        </a>
+    </small>
+      </div>
+      </div>
 {% endblock content %}

@@ -1,0 +1,57 @@
+/* Style the container to be a full-screen flexbox */
+.form-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of the viewport */
+   /* Optional background */
+}
+
+/* Style the form */
+.registration-form {
+    display: flex;
+    flex-direction: column; /* Stack input boxes and button vertically */
+    gap: 15px; /* Space between form elements */
+    width: 75%; /* Fixed width for the form */
+    padding: 20px; /* Padding around the form */
+    background-color: white; /* Background for the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(180deg, rgb(36, 36, 75), #fff); 
+    color: white;
+    font-weight: bold;
+}
+
+/* Style for input and button */
+.registration-form input,
+.registration-form button {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Border for input */
+    border-radius: 5px; /* Rounded corners for inputs and button */
+    margin: 10px 0; /* Adds spacing between the inputs and the button */
+}
+
+.registration-form button {
+    background-color: rgb(36, 36, 75); /* Button background */
+    color: white; /* Button text color */
+    cursor: pointer;
+    border: none;
+}
+
+.registration-form button:hover {
+    background-color: #2c2c62; /* Darker button color on hover */
+}
+.errorlist {
+    color: red; /* Change this to any color you want */
+    font-size: 14px; /* Optional: Change the font size */
+    font-weight: bold; /* Optional: Make the text bold */
+}
+
+/* Style for specific password validation message (if it's wrapped differently) */
+.helptext {
+    color: #ff4500; /* Example color for helptext */
+}
+.link{
+    color: darkblue;
+}
