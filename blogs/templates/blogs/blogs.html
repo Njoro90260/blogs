@@ -5,8 +5,12 @@
 <h1 class="mb-4">Blog Posts</h1>
 {% endblock page_header%}
 {% block content %} <h3>
-{% if user.is_authenticated %}
+{% if user.is_authenticated == True %}
 <a href="{% url 'blogs:newblog' %}">Add a new blog</a>
+</h3>
+{% else %}
+<h3>
+<a href="{% url 'users:register' %}">Add a new blog</a>
 </h3>
 {% endif %}
 <div class="container mt-4">
