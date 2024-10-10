@@ -60,6 +60,18 @@ The **Blogs** project provides a platform where users can write and manage blog 
     ├── templates/           # HTML templates for the project
     ├── static/              # Static files such as CSS and JS
     ├── manage.py            # Django's command-line utility for administrative tasks
+## Screenshots
+Home Page.
+![Home Page.](https://github.com/user-attachments/assets/0a8e4d9a-1323-44a7-8911-e2bfe20c6113)
+User authenticattion Page.
+![User Authentication.](https://github.com/user-attachments/assets/c4831509-56c3-41e9-8986-1401c6cb2bff)
+Blogs Page.
+![Blogs](https://github.com/user-attachments/assets/04aef3b1-d406-42ce-ad4d-ebd978edd8f4)
+Blogpost Page.
+![Blog Post](https://github.com/user-attachments/assets/4c62217e-30cd-4d94-b331-854f7ee0beeb)
+
+
+
 ## Future Improvements
 - Implement a rich text editor for formatting blog posts.
 - Add tags and categories to improve post organization.
