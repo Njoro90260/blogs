@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-^cb)%@_4i7y=o#s($@dxr1eh+0#%1_h*gy!m6mm8_@==x1&#mc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
+
 
 
 # Application definition
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'Blog.urls'
@@ -132,17 +135,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = 'users:login'
 STATIC_URL = '/static/'
 
+# Vercel serves static files from "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 # Optional: If you have multiple locations for static files, you can list them here.
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),  # Correct path for the static directory
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Heroku settings.
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
 
 if os.environ.get('DEBUG') == 'TRUE':
     DEBUG = True
