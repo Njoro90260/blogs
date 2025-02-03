@@ -17,3 +17,5 @@ env/
 
 # windows virtual environment
 myenv/
+
+venv/
