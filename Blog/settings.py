@@ -28,9 +28,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-^cb)%@_4i7y=o#s($@dxr1eh+0#%1_h*gy!m6mm8_@==x1&#mc'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', '.herokuapp.com']
+ALLOWED_HOSTS = [ '127.0.0.1', '.herokuapp.com']
 
 
 
@@ -88,7 +88,15 @@ WSGI_APPLICATION = 'Blog.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL'),
+        conn_max_age=600
+    )
+}
+
+# Add schema search path only if using multiple schemas
+DATABASES['default']['OPTIONS'] = {
+    'options': '-c search_path=blogs_db'
 }
 
 
